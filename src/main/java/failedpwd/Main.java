@@ -25,10 +25,8 @@ public class Main {
 		
 		//Read stream
 		
-		//Comment out read from local file system
-		//DataStream<String> streamf = env.readTextFile("file:///tmp/logs.txt");
 		
-		//Create stream in this class to test in kubernetes
+		
 		DataStream<String> streamf = env.fromElements(
 				
 				"Jan 13 20:22:28 host1 sshd[21487]: Failed password for root from 192.168.20.185 port 1045 ssh2",
@@ -38,7 +36,7 @@ public class Main {
 				"Jan 13 20:22:32 host2 sshd[21487]: Failed password for root from 192.168.20.185 port 1045 ssh2",
 				"Jan 13 20:23:00 host1 sshd[21487]: Failed password for root from 192.168.20.185 port 1045 ssh2",
 				"Jan 13 20:23:10 host2 sshd[21487]: Failed password for root from 192.168.20.185 port 1045 ssh2", 
-				"Jan 17 22:43:54 ip-172-31-45-164 sshd[2632]: pam_unix(sshd:session): session opened for user ec2-user by (uid=0)");
+				"Jan 17 22:43:54 ip-172-0.0.0 sshd[2632]: pam_unix(sshd:session): session opened for user ec2-user by (uid=0)");
 			
 		
 		//Filter out only the elements with the pattern and create a new stream  with only Failed Password logs/events
@@ -76,15 +74,12 @@ public class Main {
 						 
 						 
 						 return alert;
-						 //we are just passing a String of the log events.  If we wanted to create an Alert object, we could and pass the alertPattern to it,
+						 //we are just passing a String of the log events.
 					 }
 				 });
 		
 		 
-		 
-		 
-		 
-		 //This is the same logic for creating INFO messages instead of alerts - I should abstract this and make a class that can handle both...
+		 //Create a pattern with the desired message and thresholds
 		 Pattern<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>, ?> pwdInfoPattern = Pattern
 					.<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>>begin("INFO- 3 failed passwords in 5 minute")
 					.times(3)
@@ -106,7 +101,7 @@ public class Main {
 							 
 							 
 							 return alert;
-							 //we are just passing a String of the log events.  If we wanted to create an Alert object, we could and pass the alertPattern to it,
+							 //we are just passing a String of the log events.
 						 }
 					 });
 		 
@@ -114,13 +109,6 @@ public class Main {
 		//Print output
 		pwdAlerts.printToErr();
 		pwdInfos.print();
-		
-		//To do - write as CSV to AWS S3 bucket (or Kafka/Kenesis);
-		
-		
-		
-		
-		
 		
 		env.execute();
 
