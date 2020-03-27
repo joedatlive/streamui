@@ -20,11 +20,12 @@ import org.apache.flink.util.Collector;
 
 public class FailedPwd {
 
-	public static void ingest(String[] logArray, String alertSink, String eventSink) throws Exception {
+	public static void ingest(String[] logArray, String alertSink, String eventSink, Integer parellelism) throws Exception {
 		StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 		
 		//Read stream
 		DataStream<String> streamIn = env.fromElements(logArray);
+		env.setParallelism(parellelism);
 
 		//Filter out only the elements with the pattern and create a new stream  with only Failed Password logs/events
 		String pattern = "Failed password";
@@ -96,7 +97,7 @@ public class FailedPwd {
 		pwdAlerts.printToErr();
 		pwdEvents.print();
 		
-		//Write to file.  Note this will overwrite into parallel files for each thread processing the streams (8 on my local dev box)
+		//Write to file.  Note this will overwrite into parallel files (per the env.setParallelism() setting) for each thread processing the streams (8 on my local dev box).
 		pwdAlerts.writeAsText(alertSink, FileSystem.WriteMode.OVERWRITE);
 		pwdEvents.writeAsText(eventSink, FileSystem.WriteMode.OVERWRITE);
 
