@@ -13,11 +13,10 @@ public class Test {
             "Jan 13 20:23:10 host2 sshd[21487]: Failed password for root from 192.168.20.185 port 1045 ssh2", 
             "Jan 17 22:43:54 ip-172-0.0.0 sshd[2632]: pam_unix(sshd:session): session opened for user ec2-user by (uid=0)"};
 
-        
-        //String sink = "file:\\\\C:\\tmp\\flink\\test\\results.txt";
-        String sink = "C:\\tmp\\flink\\test\\results.txt";
-        FailedPwd.ingest(logArray, sink);
-        
+        String alertSink = "C:\\tmp\\flink\\test\\alerts\\results.txt";
+        String eventSink = "C:\\tmp\\flink\\test\\events\\results.txt";
+        FailedPwd.ingest(logArray, alertSink, eventSink);
+    
 
     }
 }

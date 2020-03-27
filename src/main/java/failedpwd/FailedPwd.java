@@ -3,7 +3,6 @@ package failedpwd;
 import java.util.List;
 import java.util.Map;
 
-
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.tuple.Tuple6;
 import org.apache.flink.cep.pattern.Pattern;
@@ -12,6 +11,7 @@ import org.apache.flink.cep.PatternSelectFunction;
 import org.apache.flink.cep.PatternStream;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.core.fs.FileSystem;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.types.StringValue;
 import org.apache.flink.util.Collector;
@@ -20,7 +20,7 @@ import org.apache.flink.util.Collector;
 
 public class FailedPwd {
 
-	public static void ingest(String[] logArray, String sink) throws Exception {
+	public static void ingest(String[] logArray, String alertSink, String eventSink) throws Exception {
 		StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 		
 		//Read stream
@@ -91,14 +91,15 @@ public class FailedPwd {
 							 //we are just passing a String of the log events.
 						 }
 					 });
-		 
-		 
+		
 		//Print output
 		pwdAlerts.printToErr();
 		pwdEvents.print();
 		
-		pwdAlerts.writeAsText(sink);
-		pwdEvents.writeAsText(sink);
+		//Write to file.  Note this will overwrite into parallel files for each thread processing the streams (8 on my local dev box)
+		pwdAlerts.writeAsText(alertSink, FileSystem.WriteMode.OVERWRITE);
+		pwdEvents.writeAsText(eventSink, FileSystem.WriteMode.OVERWRITE);
+
 
 		env.execute();
 	}
@@ -131,9 +132,6 @@ public class FailedPwd {
 				processValue.setValue(process);
 				accountNameValue.setValue(accountName);
 				sourceNameValue.setValue(sourceName);
-				
-				
-				
 				
 				collector.collect(result);
 				
