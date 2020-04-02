@@ -52,7 +52,7 @@ public class FailedPwd {
 		    		pwdAlertPattern);	
 		 
 		 //Then create an alert stream based on the events matching the pattern stream
-	 
+		 @SuppressWarnings("serial")
 		 DataStream<String> pwdAlerts = pwdAlertPatternStream.select(
 				 new PatternSelectFunction<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>, String>() {
 					 //@Override
@@ -79,7 +79,7 @@ public class FailedPwd {
 			    		pwdEventPattern);	
 			 
 			 //Then create an Event message stream based on the events matching the pattern stream
-		 
+			 @SuppressWarnings("serial")
 			 DataStream<String> pwdEvents = pwdEventPatternStream.select(
 					 new PatternSelectFunction<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>, String>() {
 						 //@Override
@@ -107,7 +107,7 @@ public class FailedPwd {
 
 		
 		//Here we turn field(s) into tuple(s)
-	
+	@SuppressWarnings("serial")
 	private static class tuplefy implements FlatMapFunction<String, Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>> {
 			//create fields we can re-use
 			StringValue timeStampValue = new StringValue();
