@@ -35,7 +35,7 @@ public class Utils {
 			// We need to create classes which map to the json structure. e.g. a filter class.
 			//String[] stringArray = gson.fromJson(br, String[].class);
 
-			System.out.println(stringArray);
+			//System.out.println(stringArray);
 
 		} catch (IOException e) {
 			e.printStackTrace();
