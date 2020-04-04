@@ -90,7 +90,7 @@
   </div>
 
   <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom border-gray pb-2 mb-0">Filters</h6>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Sample Filters</h6>
     <div class="media text-muted pt-3">
       <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
@@ -127,14 +127,43 @@
     </small>
   </div>
 
- 
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Live Filters</h6>
+    <div class="media text-muted pt-3">
+      <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
+      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <strong class="text-gray-dark">Failed password authetication - </strong><span class="badge badge-pill bg-light">32</span>
+          <p id="demo"></p>
+          <a href="#">Edit</a>
+        </div>
+        <span class="d-block">4 failed password authentication attempts in a 1 minute window.</span>
+      </div>
+    </div>
+    <small class="d-block text-right mt-3">
+      <a href="filters_new.html">New filter</a>
+    </small>
+  </div>
 </main>
 
 
 
-<script src="./jquery/3.4.1/jquery-3.4.1.slim.min.js"></script>
+<script src="./jquery/3.4.1/jquery-3.4.1.min.js"></script>
 <script>window.jQuery || document.write('<script src="./jquery/3.4.1/jquery-3.4.1.slim.min.js"><\/script>')</script>
 <script src="./popper/popper.min.js"></script>
 <script src="./bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="streamui.js"></script></body>
+<script src="streamui.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $.getJSON("filters.json", function(data) {
+      console.log(data);
+      console.log(data.name);
+      document.getElementById("demo".innerHTML = data.keys);
+
+    });
+  });
+</script>
+
+</body>
 </html>

@@ -135,19 +135,23 @@
   $(document).ready(function(){
     $('#form').on('submit', function(event){
       event.preventDefault();
-      var formData = JSON.stringify($("#form").serializeArray());
-      
-      //const json = serialize_form(this);
+      //serialize our form, then clean up key values so the "name" value is actuall the "key, e.g. count is a key, and not a value of a "name" key.
+      var formArray = $("#form").serializeArray();
+      var returnArray = {};
+      for (var i = 0; i < formArray.length; i++){
+        returnArray[formArray[i]['name']] = formArray[i]['value'];}
+
+      var jsonData = JSON.stringify(returnArray);
+      //var formData = JSON.stringify($("#form").serializeArray()); // this 
       $.ajax({
         url:      'data',
         type:     'POST',
         dataType: 'json',
-        data:     formData,
+        data:     jsonData,
         contentType: 'application/json',
-        //data:     $("#form").serialize(),
         success: function(result) {
           console.log(result);
-          window.location="filters.html"
+          //window.location="filters.html"
         },
         error: function(xhr, resp, text) {
           console.log(xhr, resp, text);
