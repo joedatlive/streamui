@@ -19,6 +19,9 @@ public class Test {
         String alertSink = "data\\results\\alerts\\results.txt";
         String eventSink = "data\\results\\events\\results.txt";
         Integer parellelism = 1; //keeps output files to 1
+
+        //run some util tests
+        Utils.jsonread();
         
         //run the stream analysis
         FailedPwd.ingest(logArray, alertSink, eventSink, parellelism);
