@@ -93,7 +93,19 @@
     <h6 class="border-bottom border-gray pb-2 mb-0">New Filter</h6>
     
     <form action="data" method="POST" id="form">
-        <div class="form-group row">
+      <div class="form-group row">
+        <label for="filter-title" class="col-sm-2 col-form-label">Title</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="title" placeholder="Name of filter">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="filter-description" class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="description" placeholder="Description of filter.">
+        </div>
+      </div>  
+      <div class="form-group row">
             <label for="filter-search" class="col-sm-2 col-form-label">Search</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" name="search" placeholder="Just type a string to filter and we will search for you, maybe Failed password for root.">
@@ -151,7 +163,7 @@
         contentType: 'application/json',
         success: function(result) {
           console.log(result);
-          //window.location="filters.html"
+          window.location="filters.html"
         },
         error: function(xhr, resp, text) {
           console.log(xhr, resp, text);

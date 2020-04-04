@@ -1,1 +1,1 @@
-{"search":"Detection","count":"t","window":"z"}
+{"title":"Failed Password, 4 in 1","description":"4 failed password authentication attempts in a 1 minute window.","search":"\"Failed password\"","count":"4","window":"60"}

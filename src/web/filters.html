@@ -90,19 +90,42 @@
   </div>
 
   <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom border-gray pb-2 mb-0">Sample Filters</h6>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Live Filters</h6>
     <div class="media text-muted pt-3">
       <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
+      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <strong class="text-gray-dark" id="filter_title"></strong><span class="badge badge-pill bg-light">32</span>
+          <a href="#">Edit</a>
+        </div>
+        <span class="d-block" id = "filter_description"></span>
+        <p>
+          <div><em>Search: </em><span id ="filter_search"></span></div>
+          <div><em>Count: </em><span id ="filter_count"></span></div>
+          <div><em>Window: </em><span id ="filter_window"></span></div>
+        </p>
+      </div>
+    </div>
+    <small class="d-block text-right mt-3">
+      <a href="filters_new.html">New filter</a>
+    </small>
+  </div>
+
+
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Suggested Filters</h6>
+    <div class="media text-muted pt-3">
+      <div class="badge badge-info mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
         <div class="d-flex justify-content-between align-items-center w-100">
           <strong class="text-gray-dark">Failed password authetication - </strong><span class="badge badge-pill bg-light">32</span>
           <a href="#">Edit</a>
         </div>
-        <span class="d-block">4 failed password authentication attempts in a 1 minute window.</span>
+        <span class="d-block">4 failed password authentication attempts in a window.</span>
       </div>
     </div>
     <div class="media text-muted pt-3">
-      <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
+      <div class="badge badge-info mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
         <div class="d-flex justify-content-between align-items-center w-100">
           <strong class="text-gray-dark">Exec email phishing alert</strong>
@@ -113,7 +136,7 @@
       </div>
     </div>
     <div class="media text-muted pt-3">
-      <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
+      <div class="badge badge-info mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
         <div class="d-flex justify-content-between align-items-center w-100">
           <strong class="text-gray-dark">Process starts x Network Connections x Remote root login</strong>
@@ -127,23 +150,7 @@
     </small>
   </div>
 
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom border-gray pb-2 mb-0">Live Filters</h6>
-    <div class="media text-muted pt-3">
-      <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
-      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-        <div class="d-flex justify-content-between align-items-center w-100">
-          <strong class="text-gray-dark">Failed password authetication - </strong><span class="badge badge-pill bg-light">32</span>
-          <p id="demo"></p>
-          <a href="#">Edit</a>
-        </div>
-        <span class="d-block">4 failed password authentication attempts in a 1 minute window.</span>
-      </div>
-    </div>
-    <small class="d-block text-right mt-3">
-      <a href="filters_new.html">New filter</a>
-    </small>
-  </div>
+ 
 </main>
 
 
@@ -157,9 +164,11 @@
 <script>
   $(document).ready(function() {
     $.getJSON("filters.json", function(data) {
-      console.log(data);
-      console.log(data.name);
-      document.getElementById("demo".innerHTML = data.keys);
+      document.getElementById("filter_title").innerHTML = data.title;
+      document.getElementById("filter_description").innerHTML = data.description;
+      document.getElementById("filter_search").innerHTML = data.search;
+      document.getElementById("filter_count").innerHTML = data.count;
+      document.getElementById("filter_window").innerHTML = data.window;
 
     });
   });
