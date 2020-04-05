@@ -23,7 +23,7 @@ public class Test {
         f.eventSink = "data\\results\\events\\results.txt";
 
         //run the stream filter
-        FailedPwd.ingest(f, logArray);
+        SearchWindowFilter.ingest(f, logArray);
         
         //read the file and see of results are what we expect = we will test for the time stamps and that Events and Alerts are in the right files
         File alertFile = new File(f.alertSink);
