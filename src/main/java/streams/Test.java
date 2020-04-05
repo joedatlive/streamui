@@ -16,19 +16,18 @@ public class Test {
             "Jan 13 20:23:10 host2 sshd[21487]: Failed password for root from 192.168.20.185 port 1045 ssh2", 
             "Jan 17 22:43:54 ip-172-0.0.0 sshd[2632]: pam_unix(sshd:session): session opened for user ec2-user by (uid=0)"};
         //set some variables to output test results    
-        String alertSink = "data\\results\\alerts\\results.txt";
-        String eventSink = "data\\results\\events\\results.txt";
-        Integer parellelism = 1; //keeps output files to 1
-
-        //run some util tests
-        Utils.jsonread();
         
+
+        Filter f = new Filter("Test title", "Test description", "Test stream", "Test seaarch", 99, 99);
+        f.alertSink = "data\\results\\alerts\\results.txt";
+        f.eventSink = "data\\results\\events\\results.txt";
+
         //run the stream filter
-        FailedPwd.ingest(logArray, alertSink, eventSink, parellelism);
+        FailedPwd.ingest(f, logArray);
         
         //read the file and see of results are what we expect = we will test for the time stamps and that Events and Alerts are in the right files
-        File alertFile = new File(alertSink);
-        File eventFile = new File(eventSink);
+        File alertFile = new File(f.alertSink);
+        File eventFile = new File(f.eventSink);
         String alertFileContent = FileUtils.readFileToString(alertFile);
         String eventFileContent = FileUtils.readFileToString(eventFile);
 

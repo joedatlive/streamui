@@ -105,26 +105,35 @@
           <input type="text" class="form-control" name="description" placeholder="Description of filter.">
         </div>
       </div>  
+      
       <div class="form-group row">
-            <label for="filter-search" class="col-sm-2 col-form-label">Search</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" name="search" placeholder="Just type a string to filter and we will search for you, maybe Failed password for root.">
-            </div>
-          </div>
-        
-        <div class="form-group row">
-          <label for="count" class="col-sm-2 col-form-label">Count</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="count" placeholder="Enter the count on which to fire!  E.g. 10,000 failed login attempts.">
-          </div>
+        <label for="stream" class="col-sm-2 col-form-label">Stream</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="stream" placeholder="Enter the stream to filter.">
         </div>
+      </div>
+      
+      <div class="form-group row">
+        <label for="filter-search" class="col-sm-2 col-form-label">Search</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="search" placeholder="Just type a string to filter and we will search for you, maybe Failed password for root.">
+        </div>
+      </div>
+        
+      <div class="form-group row">
+        <label for="count" class="col-sm-2 col-form-label">Count</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="count" placeholder="Enter the count on which to fire!  E.g. 10,000 failed login attempts.">
+        </div>
+      </div>
 
-        <div class="form-group row">
-            <label for="window" class="col-sm-2 col-form-label">Window</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" name="window" placeholder="Enter the time window in which to count, maybe 30 seconds, or 6 weeks.">
-            </div>
+      <div class="form-group row">
+          <label for="window" class="col-sm-2 col-form-label">Window</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="window" placeholder="Enter the time window in which to count, maybe 30 seconds, or 6 weeks.">
           </div>
+      </div>
+
       <small class="d-block text-right mt-3">
       <button id="submit" type="submit" class="btn btn-primary">Submit</button>
         </small>

@@ -100,9 +100,10 @@
         </div>
         <span class="d-block" id = "filter_description"></span>
         <p>
-          <div><em>Search: </em><span id ="filter_search"></span></div>
+          <div><em>Stream: </em><span id ="filter_stream"></span></div>
+          <div><em>Searcht: </em><span id ="filter_search"></span></div>
           <div><em>Count: </em><span id ="filter_count"></span></div>
-          <div><em>Window: </em><span id ="filter_window"></span></div>
+          <div><em>Window: </em><span id ="filter_window"></span> seconds</div>
         </p>
       </div>
     </div>
@@ -166,6 +167,7 @@
     $.getJSON("filters.json", function(data) {
       document.getElementById("filter_title").innerHTML = data.title;
       document.getElementById("filter_description").innerHTML = data.description;
+      document.getElementById("filter_stream").innerHTML = data.stream;
       document.getElementById("filter_search").innerHTML = data.search;
       document.getElementById("filter_count").innerHTML = data.count;
       document.getElementById("filter_window").innerHTML = data.window;

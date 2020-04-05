@@ -1,1 +1,1 @@
-{"title":"Failed Password, 4 in 1","description":"4 failed password authentication attempts in a 1 minute window.","search":"\"Failed password\"","count":"4","window":"60"}
+{"title":"Failed Password, 4 in 1 minute","description":"4 failed passwords from prod SSH logs in 1 minutes","stream":"samplelogs.log","search":"Failed password","count":"4","window":"60"}

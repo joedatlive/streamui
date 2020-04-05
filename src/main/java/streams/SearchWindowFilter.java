@@ -18,42 +18,42 @@ import org.apache.flink.util.Collector;
 
 
 
-public class FailedPwd {
+public class SearchWindowFilter {
 
-	public static void ingest(String[] logArray, String alertSink, String eventSink, Integer parellelism) throws Exception {
+	public static void ingest(Filter filter, String[] logArray) throws Exception {
 		StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 		
 		//Read stream
 		DataStream<String> streamIn = env.fromElements(logArray);
-		env.setParallelism(parellelism);
+		env.setParallelism(filter.parallelism);
 
 		//Filter out only the elements with the pattern and create a new stream  with only Failed Password logs/events
-		String pattern = "Failed password";
-		DataStream<String> failedPwd = Utils.pfilter(streamIn, pattern);
+		String pattern = filter.search;
+		DataStream<String> filteredStream = Utils.pfilter(streamIn, pattern);
 		
 		//Apply alert logic and create a stream
 		
-		//First we put "fields" from our log lines into Tuple objects (and an integer for counting).  And then create a stream of these Tuples
-		DataStream<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>> logStream = failedPwd.flatMap(new tuplefy());
+		//First we put "fields" from our filtered log lines into Tuple objects (and an integer for counting).  And then create a stream of these Tuples
+		DataStream<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>> logStream = filteredStream.flatMap(new tuplefy());
 		
 		
 		//Ok, let's look into alerting using the Flink Pattern class
 		
 		//First create a Pattern...
 		
-		Pattern<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>, ?> pwdAlertPattern = Pattern
-				.<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>>begin("ALERT- 4 failed passwords in 1 minute")
+		Pattern<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>, ?> alertPattern = Pattern
+				.<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>>begin("ALERT: " + filter.title)
 				.times(4)
 				.within(Time.minutes(1));
 		
 		//Then create a stream based on the Pattern
-		 PatternStream<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>> pwdAlertPatternStream = CEP.pattern(
+		 PatternStream<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>> alertPatternStream = CEP.pattern(
 		    		logStream.keyBy(2),
-		    		pwdAlertPattern);	
+		    		alertPattern);	
 		 
 		 //Then create an alert stream based on the events matching the pattern stream
 		 @SuppressWarnings("serial")
-		 DataStream<String> pwdAlerts = pwdAlertPatternStream.select(
+		 DataStream<String> alerts = alertPatternStream.select(
 				 new PatternSelectFunction<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>, String>() {
 					 //@Override
 					 public String select(Map<String, List<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>>> alertPattern) throws Exception {
@@ -68,7 +68,7 @@ public class FailedPwd {
 		
 		 //For Security events, we want to to the same as above for Alerts, just with different thresholds.  The "event" term here is a "security event", not necessarily events in the streaming context.
 		 //Create a pattern with the desired message and thresholds
-		 Pattern<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>, ?> pwdEventPattern = Pattern
+		 Pattern<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>, ?> eventPattern = Pattern
 					.<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>>begin("EVENT - 3 failed passwords in 5 minute")
 					.times(3)
 					.within(Time.minutes(5));
@@ -76,11 +76,11 @@ public class FailedPwd {
 			//Then create a stream based on the Pattern
 			 PatternStream<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>> pwdEventPatternStream = CEP.pattern(
 			    		logStream.keyBy(2),
-			    		pwdEventPattern);	
+			    		eventPattern);	
 			 
 			 //Then create an Event message stream based on the events matching the pattern stream
 			 @SuppressWarnings("serial")
-			 DataStream<String> pwdEvents = pwdEventPatternStream.select(
+			 DataStream<String> events = pwdEventPatternStream.select(
 					 new PatternSelectFunction<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>, String>() {
 						 //@Override
 						 public String select(Map<String, List<Tuple6<Integer, StringValue, StringValue, StringValue, StringValue, StringValue>>> eventPattern) throws Exception {
@@ -94,12 +94,12 @@ public class FailedPwd {
 					 });
 		
 		//Print output
-		pwdAlerts.printToErr();
-		pwdEvents.print();
+		alerts.printToErr();
+		events.print();
 		
 		//Write to file.  Note this will overwrite into parallel files (per the env.setParallelism() setting) for each thread processing the streams (8 on my local dev box).
-		pwdAlerts.writeAsText(alertSink, FileSystem.WriteMode.OVERWRITE);
-		pwdEvents.writeAsText(eventSink, FileSystem.WriteMode.OVERWRITE);
+		alerts.writeAsText(filter.alertSink, FileSystem.WriteMode.OVERWRITE);
+		events.writeAsText(filter.eventSink, FileSystem.WriteMode.OVERWRITE);
 
 
 		env.execute();
