@@ -4,7 +4,7 @@ import java.io.File;
 
 
 public class Test {
-    public static void main(String[] args) throws Exception {
+    public static void filterTest() throws Exception {
 
         String[] logArray = new String[] {
             "Jan 13 20:22:28 host1 sshd[21487]: Failed password for root from 192.168.20.185 port 1045 ssh2",
@@ -23,7 +23,7 @@ public class Test {
         //run some util tests
         Utils.jsonread();
         
-        //run the stream analysis
+        //run the stream filter
         FailedPwd.ingest(logArray, alertSink, eventSink, parellelism);
         
         //read the file and see of results are what we expect = we will test for the time stamps and that Events and Alerts are in the right files
