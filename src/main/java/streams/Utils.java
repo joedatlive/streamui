@@ -1,4 +1,4 @@
-package failedpwd;
+package streams;
 
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.streaming.api.datastream.DataStream;
