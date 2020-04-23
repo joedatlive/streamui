@@ -7,7 +7,7 @@
     <meta name="author" content="Joe Donahue">
     <title>Secdur StreamUI</title>
 
-    <link rel="canonical" href="filters.html">
+    <link rel="canonical" href="streams.html">
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="./bootstrap/4.4.1/css/bootstrap.min.css">
@@ -47,10 +47,10 @@
         <a class="nav-link" href="dash.html">Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="streams.html">Streams</a>
+        <a class="nav-link" href="streams.html">Streams <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="filters.html">Filters <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="filters.html">Filters</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="alerts.html">Alerts</a>
@@ -74,7 +74,10 @@
 <div class="nav-scroller bg-white shadow-sm">
   <nav class="nav nav-underline">
     <a class="nav-link active" href="dash.html">Dashboard</a>
-    <a class="nav-link" href="alerts.html">Alerts<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
+    <a class="nav-link" href="alerts.html">
+      Alerts
+      <span class="badge badge-pill bg-light align-text-bottom">27</span>
+    </a>
     <a class="nav-link" href="events.html">Events</a>
     <a class="nav-link" href="suggestions.html">Suggestions</a>
   </nav>
@@ -90,67 +93,31 @@
   </div>
 
   <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom border-gray pb-2 mb-0">Live Filters</h6>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Live Streams</h6>
     <div class="media text-muted pt-3">
-      <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
+      <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-random white"></span></div>
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
         <div class="d-flex justify-content-between align-items-center w-100">
-          <strong class="text-gray-dark" id="filter_title"></strong><span class="badge badge-pill bg-light">32</span>
+          <strong class="text-gray-dark" id="stream_title"></strong><span class="badge badge-pill bg-light">58</span>
           <a href="#">Edit</a>
         </div>
-        <span class="d-block" id = "filter_description"></span>
+        <span class="d-block" id = "stream_description"></span>
         <p>
-          <div><em>Stream: </em><span id ="filter_stream"></span></div>
-          <div><em>Search: "</em><span id ="filter_search"></span>"</div>
-          <div><em>Count: </em><span id ="filter_count"></span></div>
-          <div><em>Window: </em><span id ="filter_window"></span> seconds</div>
+          <div><em>Type: </em><span id ="stream_type"></span></div>
+          <div><em>Source: "</em><span id ="stream_source"></span>"</div>
+        </p>
+            <strong class="text-gray-dark" id="stream_title2"></strong><strong> stream data</strong>
+        <p>
+            <div><span id ="stream_data"></span></div>
         </p>
       </div>
     </div>
+    
+    
     <small class="d-block text-right mt-3">
-      <a href="filters_new.html">New filter</a>
+      <a href="streams_new.html">New stream</a>
     </small>
   </div>
-
-
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom border-gray pb-2 mb-0">Suggested Filters</h6>
-    <div class="media text-muted pt-3">
-      <div class="badge badge-info mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
-      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-        <div class="d-flex justify-content-between align-items-center w-100">
-          <strong class="text-gray-dark">Failed password authetication - </strong><span class="badge badge-pill bg-light">32</span>
-          <a href="#">Edit</a>
-        </div>
-        <span class="d-block">A number of failed password authentication attempts in a window.</span>
-      </div>
-    </div>
-    <div class="media text-muted pt-3">
-      <div class="badge badge-info mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
-      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-        <div class="d-flex justify-content-between align-items-center w-100">
-          <strong class="text-gray-dark">Exec email phishing alert</strong>
-          <a href="#">Edit</a>
-        </div>
-        <span class="d-block">Email phising alerts from Executive Team.
-        </span>
-      </div>
-    </div>
-    <div class="media text-muted pt-3">
-      <div class="badge badge-info mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
-      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-        <div class="d-flex justify-content-between align-items-center w-100">
-          <strong class="text-gray-dark">Process starts x Network Connections x Remote root login</strong>
-          <a href="#">Edit</a>
-        </div>
-        <span class="d-block">Any process and network connections by a remote root user.</span>
-      </div>
-    </div>
-    <small class="d-block text-right mt-3">
-      <a href="filters_new.html">New filter</a>
-    </small>
-  </div>
-
  
 </main>
 
@@ -160,21 +127,23 @@
 <script>window.jQuery || document.write('<script src="./jquery/3.4.1/jquery-3.4.1.slim.min.js"><\/script>')</script>
 <script src="./popper/popper.min.js"></script>
 <script src="./bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="streamui.js"></script>
+<script src="streamui.js"></script></body>
 
 <script>
-  $(document).ready(function() {
-    $.getJSON("data/config/filters.json", function(data) {
-      document.getElementById("filter_title").innerHTML = data.title;
-      document.getElementById("filter_description").innerHTML = data.description;
-      document.getElementById("filter_stream").innerHTML = data.stream;
-      document.getElementById("filter_search").innerHTML = data.search;
-      document.getElementById("filter_count").innerHTML = data.count;
-      document.getElementById("filter_window").innerHTML = data.window;
-
+    $(document).ready(function() {
+      $.getJSON("data/config/streams.json", function(stream_info) {
+        document.getElementById("stream_title").innerHTML = stream_info.title;
+        document.getElementById("stream_title2").innerHTML = stream_info.title;
+        document.getElementById("stream_description").innerHTML = stream_info.description;
+        document.getElementById("stream_type").innerHTML = stream_info.type;
+        document.getElementById("stream_source").innerHTML = stream_info.source;
+      });
     });
-  });
-</script>
-
-</body>
+    $(document).ready(function() {
+      $.getJSON("data/sample_sources/sample_stream.json", function(stream_data) {
+        stream_string = JSON.stringify(stream_data);
+        document.getElementById("stream_data").innerHTML = stream_string;
+      });
+    });
+  </script>
 </html>
