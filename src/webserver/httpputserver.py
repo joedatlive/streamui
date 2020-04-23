@@ -17,18 +17,28 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     """Extend SimpleHTTPRequestHandler to handle POST requests"""
     def do_POST(self):
         """Save a file following a HTTP POST request"""
-        datapath = "C:\\Users\\joed\Documents\\Source\\secdur\\streamui\\src\\web\\"
-        datafile = "filters.json"
-        filename = os.path.join(datapath, datafile)
-        file_length = int(self.headers['Content-Length'])
-        with open(filename, 'wb') as output_file:
-            output_file.write(self.rfile.read(file_length))
-        self.send_response(201, 'Created')
-        self.end_headers()
-        #reply_body = 'Taved "%s"\n' % filename
-        reply_body = '[{"name":"search","value":"Detection"}]'
-        self.wfile.write(reply_body.encode('utf-8'))
-
+        goodpath = None
+        if self.path == "/data/streams":
+            goodpath = True
+            datapath ="data/config"
+            datafile = "streamsT.json"
+        if self.path == "/data/filters":
+            goodpath = True
+            datapath ="data/config"
+            datafile = "filters.json"
+        if goodpath == True:
+            filename = os.path.join(datapath, datafile)
+            file_length = int(self.headers['Content-Length'])
+            with open(filename, 'wb') as output_file:
+                output_file.write(self.rfile.read(file_length))
+            self.send_response(201, 'Created')
+            self.end_headers()
+            #reply_body = 'Taved "%s"\n' % filename
+            reply_body = '[{"name":"search","value":"Detection"}]'
+            self.wfile.write(reply_body.encode('utf-8'))
+        else:
+            self.send_error(404)
+            
 
 if __name__ == '__main__':
     http.server.test(HandlerClass=HTTPRequestHandler, port=80)

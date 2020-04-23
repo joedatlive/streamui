@@ -7,7 +7,7 @@
     <meta name="author" content="Joe Donahue">
     <title>Secdur StreamUI</title>
 
-    <link rel="canonical" href="filters_new.html">
+    <link rel="canonical" href="streams_new.html">
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="./bootstrap/4.4.1/css/bootstrap.min.css">
@@ -47,10 +47,10 @@
         <a class="nav-link" href="dash.html">Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="streams.html">Streams</a>
+        <a class="nav-link" href="streams.html">Streams <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="filter.html">Filters <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="filter.html">Filters</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="alerts.html">Alerts</a>
@@ -90,48 +90,34 @@
   </div>
 
   <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom border-gray pb-2 mb-0">New Filter</h6>
+    <h6 class="border-bottom border-gray pb-2 mb-0">New Stream</h6>
     
     <form action="data" method="POST" id="form">
       <div class="form-group row">
-        <label for="filter-title" class="col-sm-2 col-form-label">Title</label>
+        <label for="stream-title" class="col-sm-2 col-form-label">Title</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="title" placeholder="Name of filter">
+          <input type="text" class="form-control" name="title" placeholder="Name of stream">
         </div>
       </div>
       <div class="form-group row">
-        <label for="filter-description" class="col-sm-2 col-form-label">Description</label>
+        <label for="stream-description" class="col-sm-2 col-form-label">Description</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="description" placeholder="Description of filter.">
+          <input type="text" class="form-control" name="description" placeholder="Description of stream">
         </div>
       </div>  
       
       <div class="form-group row">
-        <label for="stream" class="col-sm-2 col-form-label">Stream</label>
+        <label for="stream-type" class="col-sm-2 col-form-label">Type</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="stream" placeholder="Enter the stream to filter.">
+          <input type="text" class="form-control" name="type" placeholder="Enter the type of stream">
         </div>
       </div>
       
       <div class="form-group row">
-        <label for="filter-search" class="col-sm-2 col-form-label">Search</label>
+        <label for="stream-source" class="col-sm-2 col-form-label">Search</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="search" placeholder="Just type a string to filter and we will search for you, maybe Failed password for root.">
+          <input type="text" class="form-control" name="source" placeholder="URI of stream">
         </div>
-      </div>
-        
-      <div class="form-group row">
-        <label for="count" class="col-sm-2 col-form-label">Count</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" name="count" placeholder="Enter the count on which to fire!  E.g. 10,000 failed login attempts.">
-        </div>
-      </div>
-
-      <div class="form-group row">
-          <label for="window" class="col-sm-2 col-form-label">Window</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="window" placeholder="Enter the time window in which to count, maybe 30 seconds, or 6 weeks.">
-          </div>
       </div>
 
       <small class="d-block text-right mt-3">
@@ -156,7 +142,7 @@
   $(document).ready(function(){
     $('#form').on('submit', function(event){
       event.preventDefault();
-      //serialize our form, then clean up key values so the "name" value is actuall the "key, e.g. count is a key, and not a value of a "name" key.
+      //serialize our form, then clean up key values so the "name" value is actually the "key, e.g. count is a key, and not a value of a "name" key.
       var formArray = $("#form").serializeArray();
       var returnArray = {};
       for (var i = 0; i < formArray.length; i++){
@@ -165,14 +151,14 @@
       var jsonData = JSON.stringify(returnArray);
       //var formData = JSON.stringify($("#form").serializeArray()); // this 
       $.ajax({
-        url:      'data',
+        url:      'data/streams',
         type:     'POST',
         dataType: 'json',
         data:     jsonData,
         contentType: 'application/json',
         success: function(result) {
           console.log(result);
-          window.location="filters.html"
+          window.location="streams.html"
         },
         error: function(xhr, resp, text) {
           console.log(xhr, resp, text);
