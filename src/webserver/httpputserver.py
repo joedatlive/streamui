@@ -21,7 +21,7 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         if self.path == "/data/streams":
             goodpath = True
             datapath ="data/config"
-            datafile = "streamsT.json"
+            datafile = "streamsT.json" # set to prod file when we can append
         if self.path == "/data/filters":
             goodpath = True
             datapath ="data/config"
