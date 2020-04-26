@@ -12,6 +12,8 @@ There is a web site at dash.html, which is mostly mocked up.  There is some live
 ### Running and output
 You will need a web server to serve the UI and to be able to post new fitlers and streams  I use a python web server for development and it is in the src\webserver folder.  Plans are to move the config and data files to a standard cloud storage like S3.  Lots changing here, so I won't include too many details.
 
+NOTE: Need to run in IDE (VScode is what I use) as the build dependencies are a mess.  Plan is to use maven, but need to get dependencies working.
+
 Check the repo issues to get a sense of what is working.  The active work 
 
 ### UI
