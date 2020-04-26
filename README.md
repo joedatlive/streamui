@@ -10,9 +10,9 @@ The program is run in the FilterManager class for now, which looks at configured
 There is a web site at dash.html, which is mostly mocked up.  There is some live data in Filters.html, and Streams.html, which allow users to configure streams and filters in the config files mentioned above.  E.g. you can click on "New fitlers" or "New Streams" respectively and create new ones which will show in the UI.  Supporting more than one filter and more than one stream are WIP. ALso, still need to wire up the streams we create to the analysis.  Work In Progress! 
 
 ### Running and output
-You will need a web server to serve the UI and to be able to post new fitlers and streams  I use a python web server for development and it is in the src\webserver folder.  Plans are to move the config and data files to a standard cloud storage like S3.  Lots changing here, so I won't include too many details.
+You will need a web server to serve the UI and to be able to post new filters and streams  I use a python web server for development and it is in the src\webserver folder.  Plans are to move the config and data files to a standard cloud storage like S3.  Lots changing here, so I won't include too many details.
 
-You can build the filter jar with maven: in the root project/repo/workspace directory (i.e. streamui) run "mvn clean install --also-make"
+You can build the FilterManager.java (with main) jar with maven: in the root project/repo/workspace directory (i.e. streamui) run "mvn clean install --also-make"
 then from same directory run "target\streamui-0.1.jar". This will launch FilterManager.main
 
 Check the repo issues to get a sense of what is working. The issues in milestone "now" are the active ones with the latest status.
