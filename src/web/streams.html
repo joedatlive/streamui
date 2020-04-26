@@ -94,25 +94,44 @@
 
   <div class="my-3 p-3 bg-white rounded shadow-sm">
     <h6 class="border-bottom border-gray pb-2 mb-0">Live Streams</h6>
+    
     <div class="media text-muted pt-3">
       <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-random white"></span></div>
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
         <div class="d-flex justify-content-between align-items-center w-100">
-          <strong class="text-gray-dark" id="stream_title"></strong><span class="badge badge-pill bg-light">58</span>
+          <strong class="text-gray-dark" id="stream_title0"></strong><span class="badge badge-pill bg-light">58</span>
           <a href="#">Edit</a>
         </div>
-        <span class="d-block" id = "stream_description"></span>
+        <span class="d-block" id = "stream_description0"></span>
         <p>
-          <div><em>Type: </em><span id ="stream_type"></span></div>
-          <div><em>Source: "</em><span id ="stream_source"></span>"</div>
+          <div><em>Type: </em><span id ="stream_type0"></span></div>
+          <div><em>Source: "</em><span id ="stream_source0"></span>"</div>
         </p>
-            <strong class="text-gray-dark" id="stream_title2"></strong><strong> stream data</strong>
+            <em class="text-gray-dark" id="stream_title0.1"></em><em> sampled stream data:</em>
         <p>
-            <div><span id ="stream_data"></span></div>
+            <div><span id ="stream_data0"></span></div>
         </p>
       </div>
     </div>
     
+    <div class="media text-muted pt-3">
+      <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-random white"></span></div>
+      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <strong class="text-gray-dark" id="stream_title1"></strong><span class="badge badge-pill bg-light">218</span>
+          <a href="#">Edit</a>
+        </div>
+        <span class="d-block" id = "stream_description1"></span>
+        <p>
+          <div><em>Type: </em><span id ="stream_type1"></span></div>
+          <div><em>Source: "</em><span id ="stream_source1"></span>"</div>
+        </p>
+            <em class="text-gray-dark" id="stream_title1.1"></em><em> sampled stream data:</em>
+        <p>
+            <div><span id ="stream_data1"></span></div>
+        </p>
+      </div>
+    </div>
     
     <small class="d-block text-right mt-3">
       <a href="streams_new.html">New stream</a>
@@ -131,19 +150,29 @@
 
 <script>
     $(document).ready(function() {
-      $.getJSON("data/config/streams.json", function(stream_info) {
-        document.getElementById("stream_title").innerHTML = stream_info.title;
-        document.getElementById("stream_title2").innerHTML = stream_info.title;
-        document.getElementById("stream_description").innerHTML = stream_info.description;
-        document.getElementById("stream_type").innerHTML = stream_info.type;
-        document.getElementById("stream_source").innerHTML = stream_info.source;
+      var file = "data/config/streams.json";
+      $.get(file, function(data){
+          var lines = data.split("\n");
+          for (var i = 0, len = lines.length; i < len - 1; i++) {
+            var jsonline = JSON.parse(lines[i]);
+            document.getElementById("stream_title" + i).innerHTML = jsonline.title;
+            document.getElementById("stream_title" + i + ".1").innerHTML = jsonline.title;
+            document.getElementById("stream_description" + i).innerHTML = jsonline.description;
+            document.getElementById("stream_type" + i).innerHTML = jsonline.type;
+            document.getElementById("stream_source" + i).innerHTML = jsonline.source;
+          }
+        });
+      
+      $.get("data/sample_sources/pwdstream.txt", function(stream_text) {
+      textstr = stream_text.toString().split("\n");
+      document.getElementById("stream_data0").innerHTML = textstr[0];
       });
-    });
-    $(document).ready(function() {
+
       $.getJSON("data/sample_sources/sample_stream.json", function(stream_data) {
-        stream_string = JSON.stringify(stream_data);
-        document.getElementById("stream_data").innerHTML = stream_string;
+      stream_string = JSON.stringify(stream_data);
+      document.getElementById("stream_data1").innerHTML = stream_string;
       });
-    });
+
+     });
   </script>
 </html>
