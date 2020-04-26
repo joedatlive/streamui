@@ -21,7 +21,7 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         if self.path == "/data/streams":
             goodpath = True
             datapath ="data/config"
-            datafile = "streamsT.json" # set to prod file when we can append
+            datafile = "streams.json"
         if self.path == "/data/filters":
             goodpath = True
             datapath ="data/config"
@@ -29,8 +29,8 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         if goodpath == True:
             filename = os.path.join(datapath, datafile)
             file_length = int(self.headers['Content-Length'])
-            with open(filename, 'wb') as output_file:
-                output_file.write(self.rfile.read(file_length))
+            with open(filename, 'ab') as output_file:
+                output_file.write(self.rfile.read(file_length) + "\n".encode('ascii'))
             self.send_response(201, 'Created')
             self.end_headers()
             #reply_body = 'Taved "%s"\n' % filename
