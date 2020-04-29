@@ -93,7 +93,7 @@
   </div>
 
   <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom border-gray pb-2 mb-0">Live Streams</h6>
+    <h6 id = "top_of_list" class="border-bottom border-gray pb-2 mb-0">Live Streams</h6>
     
     <div class="media text-muted pt-3">
       <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-random white"></span></div>
@@ -152,16 +152,26 @@
     $(document).ready(function() {
       var file = "data/config/streams.json";
       $.get(file, function(data){
-          var lines = data.split("\n");
-          for (var i = 0, len = lines.length; i < len - 1; i++) {
-            var jsonline = JSON.parse(lines[i]);
-            document.getElementById("stream_title" + i).innerHTML = jsonline.title;
-            document.getElementById("stream_title" + i + ".1").innerHTML = jsonline.title;
-            document.getElementById("stream_description" + i).innerHTML = jsonline.description;
-            document.getElementById("stream_type" + i).innerHTML = jsonline.type;
-            document.getElementById("stream_source" + i).innerHTML = jsonline.source;
+        var newstreamdiv = "";
+        var newelemdiv = "";
+        var lines = data.split("\n");
+        //let's loop through each line and create a div for each strem entry in the UI
+        for (var linenum = 0, len = lines.length; linenum < len - 1; linenum++) {
+          newstreamdiv = '<div id="stream_div_' + linenum + '" />';
+          $('body').append(newstreamdiv);
+          //let's parse the line into JSON
+          var jsonline = JSON.parse(lines[linenum]);
+          //for each json element (key value pair) let's create divs
+          for (var key of Object.keys(jsonline)) {
+            newelemdiv += '<div id="elem_div_' + key + linenum + '" />';
+            //and append the new divs to the DOM in the right place
+            $('body').append(newelemdiv);
+            var newelemdiv = "";
+             //and map the json elements to the new divs
+            document.getElementById("elem_div_" + key + linenum).innerHTML = jsonline[key];
           }
-        });
+        }
+      });
       
       $.get("data/sample_sources/pwdstream.txt", function(stream_text) {
       textstr = stream_text.toString().split("\n");
