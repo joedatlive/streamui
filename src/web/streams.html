@@ -93,46 +93,7 @@
   </div>
 
   <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 id = "top_of_list" class="border-bottom border-gray pb-2 mb-0">Live Streams</h6>
-    
-    <div class="media text-muted pt-3">
-      <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-random white"></span></div>
-      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-        <div class="d-flex justify-content-between align-items-center w-100">
-          <strong class="text-gray-dark" id="stream_title0"></strong><span class="badge badge-pill bg-light">58</span>
-          <a href="#">Edit</a>
-        </div>
-        <span class="d-block" id = "stream_description0"></span>
-        <p>
-          <div><em>Type: </em><span id ="stream_type0"></span></div>
-          <div><em>Source: "</em><span id ="stream_source0"></span>"</div>
-        </p>
-            <em class="text-gray-dark" id="stream_title0.1"></em><em> sampled stream data:</em>
-        <p>
-            <div><span id ="stream_data0"></span></div>
-        </p>
-      </div>
-    </div>
-    
-    <div class="media text-muted pt-3">
-      <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-random white"></span></div>
-      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-        <div class="d-flex justify-content-between align-items-center w-100">
-          <strong class="text-gray-dark" id="stream_title1"></strong><span class="badge badge-pill bg-light">218</span>
-          <a href="#">Edit</a>
-        </div>
-        <span class="d-block" id = "stream_description1"></span>
-        <p>
-          <div><em>Type: </em><span id ="stream_type1"></span></div>
-          <div><em>Source: "</em><span id ="stream_source1"></span>"</div>
-        </p>
-            <em class="text-gray-dark" id="stream_title1.1"></em><em> sampled stream data:</em>
-        <p>
-            <div><span id ="stream_data1"></span></div>
-        </p>
-      </div>
-    </div>
-    
+    <h6 id = "list-index-0" class="border-bottom border-gray pb-2 mb-0">Live Streams</h6>
     <small class="d-block text-right mt-3">
       <a href="streams_new.html">New stream</a>
     </small>
@@ -149,30 +110,56 @@
 <script src="streamui.js"></script></body>
 
 <script>
-    $(document).ready(function() {
+   $(document).ready(function() {
       var file = "data/config/streams.json";
       $.get(file, function(data){
-        var newstreamdiv = "";
-        var newelemdiv = "";
+        //hard coding json keys to use for HTNML element IDs
+        var id1 = "title";
+        var id2 = "description";
+        var id3 = "type";
+        var id4 = "source";
+        //html template for each stream we find
+        var newstreamhtml = `
+        <div class="media text-muted pt-3">
+          <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-random white"></span></div>
+          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <div class="d-flex justify-content-between align-items-center w-100">
+              <strong class="text-gray-dark" id="${id1}"></strong><span class="badge badge-pill bg-light">218</span>
+              <a href="#">Edit</a>
+            </div>
+            <span class="d-block" id = "${id2}"></span>
+            <p>
+              <div><em>Type: </em><span id ="${id3}"></span></div>
+              <div><em>Source: "</em><span id ="${id4}"></span>"</div>
+            </p>
+            <em class="text-gray-dark">Sampled stream data:</em>
+            <p>
+              <div><span id ="stream_data"></span></div>
+            </p>
+          </div>
+        </div;
+        `;
         var lines = data.split("\n");
-        //let's loop through each line and create a div for each strem entry in the UI
+        //let's loop through each line and parese the json to populate our html
         for (var linenum = 0, len = lines.length; linenum < len - 1; linenum++) {
-          newstreamdiv = '<div id="stream_div_' + linenum + '" />';
-          $('body').append(newstreamdiv);
-          //let's parse the line into JSON
+          //insert html template for each stream config (json) found
+          $(newstreamhtml).insertAfter('#list-index-0');
           var jsonline = JSON.parse(lines[linenum]);
-          //for each json element (key value pair) let's create divs
-          for (var key of Object.keys(jsonline)) {
-            newelemdiv += '<div id="elem_div_' + key + linenum + '" />';
-            //and append the new divs to the DOM in the right place
-            $('body').append(newelemdiv);
-            var newelemdiv = "";
-             //and map the json elements to the new divs
-            document.getElementById("elem_div_" + key + linenum).innerHTML = jsonline[key];
-          }
+          //for each json element (key value pair) let's set our variables
+            var keys = Object.keys(jsonline);
+            for (var key of keys) {
+              console.log(key);
+              console.log(keys);
+              console.log(jsonline[key]);
+              document.getElementById(key).innerHTML = jsonline[key];
+              $.get("data/sample_sources/pwdstream.txt", function(stream_text) {
+              textstr = stream_text.toString().split("\n");
+              document.getElementById("stream_data").innerHTML = textstr[0];
+      });
+            }
         }
       });
-      
+      /*
       $.get("data/sample_sources/pwdstream.txt", function(stream_text) {
       textstr = stream_text.toString().split("\n");
       document.getElementById("stream_data0").innerHTML = textstr[0];
@@ -182,6 +169,7 @@
       stream_string = JSON.stringify(stream_data);
       document.getElementById("stream_data1").innerHTML = stream_string;
       });
+      */
 
      });
   </script>
