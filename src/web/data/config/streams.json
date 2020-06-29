@@ -1,2 +1,3 @@
 {"title":"prod-syslog-authn","description":"Authentication logs from prod","type":"syslog","source":"src/web/data/sample_sources/pwdstream.txt"}
 {"title":"prod-osquery-irpack","description":"Stream of OSquery Incident-Response query pack data","type":"json-file","source":"C:/Program Files/osquery/log/osqueryd.results.log"}
+{"title":"corp-osquery-all-output","description":"All info, errors, warnings, results, and snapeshots from OSquery","type":"files","source":"C:\\Program_Files\\OSquery\\log"}

@@ -113,64 +113,37 @@
    $(document).ready(function() {
       var file = "data/config/streams.json";
       $.get(file, function(data){
-        //hard coding json keys to use for HTNML element IDs
-        var id1 = "title";
-        var id2 = "description";
-        var id3 = "type";
-        var id4 = "source";
-        //html template for each stream we find
-        var newstreamhtml = `
-        <div class="media text-muted pt-3">
-          <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-random white"></span></div>
-          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <div class="d-flex justify-content-between align-items-center w-100">
-              <strong class="text-gray-dark" id="${id1}"></strong><span class="badge badge-pill bg-light">218</span>
-              <a href="#">Edit</a>
-            </div>
-            <span class="d-block" id = "${id2}"></span>
-            <p>
-              <div><em>Type: </em><span id ="${id3}"></span></div>
-              <div><em>Source: "</em><span id ="${id4}"></span>"</div>
-            </p>
-            <em class="text-gray-dark">Sampled stream data:</em>
-            <p>
-              <div><span id ="stream_data"></span></div>
-            </p>
-          </div>
-        </div;
-        `;
         var lines = data.split("\n");
-        //let's loop through each line and parese the json to populate our html
+        //let's loop through each line and parse the json to populate our html
         for (var linenum = 0, len = lines.length; linenum < len - 1; linenum++) {
+          //html template for each stream we find
+          var streamhtml = `
+          <div class="media text-muted pt-3">
+            <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-random white"></span></div>
+            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+              <div class="d-flex justify-content-between align-items-center w-100">
+                <strong class="text-gray-dark" id="title${linenum}"></strong><span class="badge badge-pill bg-light">218</span>
+                <a href="#">Edit</a>
+              </div>
+              <span class="d-block" id = "description${linenum}"></span>
+              <p>
+                <div><em>Type: </em><span id ="type${linenum}"></span></div>
+                <div><em>Source: "</em><span id ="source${linenum}"></span>"</div>
+              </p>
+            </div>
+          </div;
+          `;
           //insert html template for each stream config (json) found
-          $(newstreamhtml).insertAfter('#list-index-0');
+          $(streamhtml).insertAfter('#list-index-0');
+          //parse the line we read into json object
           var jsonline = JSON.parse(lines[linenum]);
           //for each json element (key value pair) let's set our variables
-            var keys = Object.keys(jsonline);
-            for (var key of keys) {
-              console.log(key);
-              console.log(keys);
-              console.log(jsonline[key]);
-              document.getElementById(key).innerHTML = jsonline[key];
-              $.get("data/sample_sources/pwdstream.txt", function(stream_text) {
-              textstr = stream_text.toString().split("\n");
-              document.getElementById("stream_data").innerHTML = textstr[0];
-      });
-            }
+          var keys = Object.keys(jsonline);
+          for (var key of keys) {
+            document.getElementById(key + linenum).innerHTML = jsonline[key];
+          }
         }
       });
-      /*
-      $.get("data/sample_sources/pwdstream.txt", function(stream_text) {
-      textstr = stream_text.toString().split("\n");
-      document.getElementById("stream_data0").innerHTML = textstr[0];
-      });
-
-      $.getJSON("data/sample_sources/sample_stream.json", function(stream_data) {
-      stream_string = JSON.stringify(stream_data);
-      document.getElementById("stream_data1").innerHTML = stream_string;
-      });
-      */
-
      });
   </script>
 </html>
