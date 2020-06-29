@@ -10,10 +10,10 @@
     <link rel="canonical" href="streams.html">
 
     <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="./bootstrap/4.4.1/css/bootstrap.min.css">
-<link href="./bootstrap/4.4.1/css/glyphicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="./bootstrap/4.4.1/css/glyphicons.css" rel="stylesheet" />
     <!-- Favicons -->
-<link rel="icon" href="./assets/brand/favicon.ico">
+    <link rel="icon" href="./assets/brand/favicon.ico">
 
     <style>
       .bd-placeholder-img {
@@ -36,114 +36,106 @@
   </head>
   <body class="bg-light">
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-  <a class="navbar-brand mr-auto mr-lg-0" href="#">StreamUI</a>
-  <button class="navbar-toggler p-0 border-0" type="button" data-toggle="stream">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="dash.html">Dashboard</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="streams.html">Streams <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="filters.html">Filters</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="alerts.html">Alerts</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-
-<div class="nav-scroller bg-white shadow-sm">
-  <nav class="nav nav-underline">
-    <a class="nav-link active" href="dash.html">Dashboard</a>
-    <a class="nav-link" href="alerts.html">
-      Alerts
-      <span class="badge badge-pill bg-light align-text-bottom">27</span>
-    </a>
-    <a class="nav-link" href="events.html">Events</a>
-    <a class="nav-link" href="suggestions.html">Suggestions</a>
-  </nav>
-</div>
-
-<main role="main" class="container">
-  <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-blue rounded shadow-sm">
-    <img class="mr-3" src="./assets/brand/logosq.png" alt="" width="48" height="48">
-    <div class="lh-100">
-      <h6 class="mb-0 text-white lh-100">StreamUI</h6>
-      <small>Security Analysis</small>
-    </div>
-  </div>
-
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 id = "list-index-0" class="border-bottom border-gray pb-2 mb-0">Live Streams</h6>
-    <small class="d-block text-right mt-3">
-      <a href="streams_new.html">New stream</a>
-    </small>
-  </div>
- 
-</main>
-
-
-
-<script src="./jquery/3.4.1/jquery-3.4.1.min.js"></script>
-<script>window.jQuery || document.write('<script src="./jquery/3.4.1/jquery-3.4.1.slim.min.js"><\/script>')</script>
-<script src="./popper/popper.min.js"></script>
-<script src="./bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="streamui.js"></script></body>
-
-<script>
-   $(document).ready(function() {
-      var file = "data/config/streams.json";
-      $.get(file, function(data){
-        var lines = data.split("\n");
-        //let's loop through each line and parse the json to populate our html
-        for (var linenum = 0, len = lines.length; linenum < len - 1; linenum++) {
-          //html template for each stream we find
-          var streamhtml = `
-          <div class="media text-muted pt-3">
-            <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-random white"></span></div>
-            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <div class="d-flex justify-content-between align-items-center w-100">
-                <strong class="text-gray-dark" id="title${linenum}"></strong><span class="badge badge-pill bg-light">218</span>
-                <a href="#">Edit</a>
-              </div>
-              <span class="d-block" id = "description${linenum}"></span>
-              <p>
-                <div><em>Type: </em><span id ="type${linenum}"></span></div>
-                <div><em>Source: "</em><span id ="source${linenum}"></span>"</div>
-              </p>
+      <a class="navbar-brand mr-auto mr-lg-0" href="#">StreamUI</a>
+      <button class="navbar-toggler p-0 border-0" type="button" data-toggle="stream">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="dash.html">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="streams.html">Streams <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="filters.html">Filters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="alerts.html">Alerts</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
             </div>
-          </div;
-          `;
-          //insert html template for each stream config (json) found
-          $(streamhtml).insertAfter('#list-index-0');
-          //parse the line we read into json object
-          var jsonline = JSON.parse(lines[linenum]);
-          //for each json element (key value pair) let's set our variables
-          var keys = Object.keys(jsonline);
-          for (var key of keys) {
-            document.getElementById(key + linenum).innerHTML = jsonline[key];
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+    <div class="nav-scroller bg-white shadow-sm">
+      <nav class="nav nav-underline">
+        <a class="nav-link active" href="dash.html">Dashboard</a>
+        <a class="nav-link" href="alerts.html">
+          Alerts
+          <span class="badge badge-pill bg-light align-text-bottom">27</span>
+        </a>
+        <a class="nav-link" href="events.html">Events</a>
+        <a class="nav-link" href="suggestions.html">Suggestions</a>
+      </nav>
+    </div>
+    <main role="main" class="container">
+      <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-blue rounded shadow-sm">
+        <img class="mr-3" src="./assets/brand/logosq.png" alt="" width="48" height="48">
+        <div class="lh-100">
+          <h6 class="mb-0 text-white lh-100">StreamUI</h6>
+          <small>Security Analysis</small>
+        </div>
+      </div>
+      <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h6 id = "list-index-0" class="border-bottom border-gray pb-2 mb-0">Live Streams</h6>
+        <small class="d-block text-right mt-3">
+          <a href="streams_new.html">New stream</a>
+        </small>
+      </div>
+    </main>
+    <script src="./jquery/3.4.1/jquery-3.4.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="./jquery/3.4.1/jquery-3.4.1.slim.min.js"><\/script>')</script>
+    <script src="./popper/popper.min.js"></script>
+    <script src="./bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="streamui.js"></script></body>
+    <script>
+      $(document).ready(function() {
+        var file = "data/config/streams.json";
+        $.get(file, function(data){
+          var lines = data.split("\n");
+          //let's loop through each line and parse the json to populate our html
+          for (var linenum = 0, len = lines.length; linenum < len - 1; linenum++) {
+            //html template for each stream we find
+            var streamhtml = `
+            <div class="media text-muted pt-3">
+              <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-random white"></span></div>
+              <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                  <strong class="text-gray-dark" id="title${linenum}"></strong><span class="badge badge-pill bg-light">218</span>
+                  <a href="#">Edit</a>
+                </div>
+                <span class="d-block" id = "description${linenum}"></span>
+                <p>
+                  <div><em>Type: </em><span id ="type${linenum}"></span></div>
+                  <div><em>Source: "</em><span id ="source${linenum}"></span>"</div>
+                </p>
+              </div>
+            </div;
+            `;
+            //insert html template for each stream config (json) found
+            $(streamhtml).insertAfter('#list-index-0');
+            //parse the line we read into json object
+            var jsonline = JSON.parse(lines[linenum]);
+            //for each json element (key value pair) let's set our variables
+            var keys = Object.keys(jsonline);
+            for (var key of keys) {
+              document.getElementById(key + linenum).innerHTML = jsonline[key];
+            }
           }
-        }
+        });
       });
-     });
-  </script>
+    </script>
+  </body>
 </html>

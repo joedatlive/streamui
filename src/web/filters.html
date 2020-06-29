@@ -10,10 +10,10 @@
     <link rel="canonical" href="filters.html">
 
     <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="./bootstrap/4.4.1/css/bootstrap.min.css">
-<link href="./bootstrap/4.4.1/css/glyphicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="./bootstrap/4.4.1/css/glyphicons.css" rel="stylesheet" />
     <!-- Favicons -->
-<link rel="icon" href="./assets/brand/favicon.ico">
+    <link rel="icon" href="./assets/brand/favicon.ico">
 
     <style>
       .bd-placeholder-img {
@@ -36,145 +36,131 @@
   </head>
   <body class="bg-light">
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-  <a class="navbar-brand mr-auto mr-lg-0" href="#">StreamUI</a>
-  <button class="navbar-toggler p-0 border-0" type="button" data-toggle="stream">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="dash.html">Dashboard</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="streams.html">Streams</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="filters.html">Filters <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="alerts.html">Alerts</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-
-<div class="nav-scroller bg-white shadow-sm">
-  <nav class="nav nav-underline">
-    <a class="nav-link active" href="dash.html">Dashboard</a>
-    <a class="nav-link" href="alerts.html">Alerts<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
-    <a class="nav-link" href="events.html">Events</a>
-    <a class="nav-link" href="suggestions.html">Suggestions</a>
-  </nav>
-</div>
-
-<main role="main" class="container">
-  <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-blue rounded shadow-sm">
-    <img class="mr-3" src="./assets/brand/logosq.png" alt="" width="48" height="48">
-    <div class="lh-100">
-      <h6 class="mb-0 text-white lh-100">StreamUI</h6>
-      <small>Security Analysis</small>
-    </div>
-  </div>
-
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom border-gray pb-2 mb-0">Live Filters</h6>
-    <div class="media text-muted pt-3">
-      <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
-      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-        <div class="d-flex justify-content-between align-items-center w-100">
-          <strong class="text-gray-dark" id="filter_title"></strong><span class="badge badge-pill bg-light">32</span>
-          <a href="#">Edit</a>
-        </div>
-        <span class="d-block" id = "filter_description"></span>
-        <p>
-          <div><em>Stream: </em><span id ="filter_stream"></span></div>
-          <div><em>Search: "</em><span id ="filter_search"></span>"</div>
-          <div><em>Count: </em><span id ="filter_count"></span></div>
-          <div><em>Window: </em><span id ="filter_window"></span> seconds</div>
-        </p>
+      <a class="navbar-brand mr-auto mr-lg-0" href="#">StreamUI</a>
+      <button class="navbar-toggler p-0 border-0" type="button" data-toggle="stream">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="dash.html">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="streams.html">Streams</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="filters.html">Filters <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="alerts.html">Alerts</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
       </div>
+    </nav>
+    <div class="nav-scroller bg-white shadow-sm">
+      <nav class="nav nav-underline">
+        <a class="nav-link active" href="dash.html">Dashboard</a>
+        <a class="nav-link" href="alerts.html">Alerts<span class="badge badge-pill bg-light align-text-bottom">27</span></a>
+        <a class="nav-link" href="events.html">Events</a>
+        <a class="nav-link" href="suggestions.html">Suggestions</a>
+      </nav>
     </div>
-    <small class="d-block text-right mt-3">
-      <a href="filters_new.html">New filter</a>
-    </small>
-  </div>
-
-
-  <div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom border-gray pb-2 mb-0">Suggested Filters</h6>
-    <div class="media text-muted pt-3">
-      <div class="badge badge-info mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
-      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-        <div class="d-flex justify-content-between align-items-center w-100">
-          <strong class="text-gray-dark">Failed password authetication - </strong><span class="badge badge-pill bg-light">32</span>
-          <a href="#">Edit</a>
+    <main role="main" class="container">
+      <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-blue rounded shadow-sm">
+        <img class="mr-3" src="./assets/brand/logosq.png" alt="" width="48" height="48">
+        <div class="lh-100">
+          <h6 class="mb-0 text-white lh-100">StreamUI</h6>
+          <small>Security Analysis</small>
         </div>
-        <span class="d-block">A number of failed password authentication attempts in a window.</span>
       </div>
-    </div>
-    <div class="media text-muted pt-3">
-      <div class="badge badge-info mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
-      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-        <div class="d-flex justify-content-between align-items-center w-100">
-          <strong class="text-gray-dark">Exec email phishing alert</strong>
-          <a href="#">Edit</a>
+      <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h6 class="border-bottom border-gray pb-2 mb-0">Live Filters</h6>
+        <div class="media text-muted pt-3">
+          <div class="badge badge-success mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
+          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <div class="d-flex justify-content-between align-items-center w-100">
+              <strong class="text-gray-dark" id="filter_title"></strong><span class="badge badge-pill bg-light">32</span>
+              <a href="#">Edit</a>
+            </div>
+            <span class="d-block" id = "filter_description"></span>
+            <p>
+              <div><em>Stream: </em><span id ="filter_stream"></span></div>
+              <div><em>Search: "</em><span id ="filter_search"></span>"</div>
+              <div><em>Count: </em><span id ="filter_count"></span></div>
+              <div><em>Window: </em><span id ="filter_window"></span> seconds</div>
+            </p>
+          </div>
         </div>
-        <span class="d-block">Email phising alerts from Executive Team.
-        </span>
+        <small class="d-block text-right mt-3">
+          <a href="filters_new.html">New filter</a>
+        </small>
       </div>
-    </div>
-    <div class="media text-muted pt-3">
-      <div class="badge badge-info mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
-      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-        <div class="d-flex justify-content-between align-items-center w-100">
-          <strong class="text-gray-dark">Process starts x Network Connections x Remote root login</strong>
-          <a href="#">Edit</a>
+      <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h6 class="border-bottom border-gray pb-2 mb-0">Suggested Filters</h6>
+        <div class="media text-muted pt-3">
+          <div class="badge badge-info mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
+          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <div class="d-flex justify-content-between align-items-center w-100">
+              <strong class="text-gray-dark">Failed password authetication - </strong><span class="badge badge-pill bg-light">32</span>
+              <a href="#">Edit</a>
+            </div>
+            <span class="d-block">A number of failed password authentication attempts in a window.</span>
+          </div>
         </div>
-        <span class="d-block">Any process and network connections by a remote root user.</span>
+        <div class="media text-muted pt-3">
+          <div class="badge badge-info mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
+          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <div class="d-flex justify-content-between align-items-center w-100">
+              <strong class="text-gray-dark">Exec email phishing alert</strong>
+              <a href="#">Edit</a>
+            </div>
+            <span class="d-block">Email phising alerts from Executive Team.
+            </span>
+          </div>
+        </div>
+        <div class="media text-muted pt-3">
+          <div class="badge badge-info mr-2 mt-1 p-2"><span class="glyphicon glyphicon-filter white"></span></div>
+          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <div class="d-flex justify-content-between align-items-center w-100">
+              <strong class="text-gray-dark">Process starts x Network Connections x Remote root login</strong>
+              <a href="#">Edit</a>
+            </div>
+            <span class="d-block">Any process and network connections by a remote root user.</span>
+          </div>
+        </div>
+        <small class="d-block text-right mt-3">
+          <a href="filters_new.html">New filter</a>
+        </small>
       </div>
-    </div>
-    <small class="d-block text-right mt-3">
-      <a href="filters_new.html">New filter</a>
-    </small>
-  </div>
-
- 
-</main>
-
-
-
-<script src="./jquery/3.4.1/jquery-3.4.1.min.js"></script>
-<script>window.jQuery || document.write('<script src="./jquery/3.4.1/jquery-3.4.1.slim.min.js"><\/script>')</script>
-<script src="./popper/popper.min.js"></script>
-<script src="./bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="streamui.js"></script>
-
-<script>
-  $(document).ready(function() {
-    $.getJSON("data/config/filters.json", function(data) {
-      document.getElementById("filter_title").innerHTML = data.title;
-      document.getElementById("filter_description").innerHTML = data.description;
-      document.getElementById("filter_stream").innerHTML = data.stream;
-      document.getElementById("filter_search").innerHTML = data.search;
-      document.getElementById("filter_count").innerHTML = data.count;
-      document.getElementById("filter_window").innerHTML = data.window;
-
-    });
-  });
-</script>
-
-</body>
+    </main>
+    <script src="./jquery/3.4.1/jquery-3.4.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="./jquery/3.4.1/jquery-3.4.1.slim.min.js"><\/script>')</script>
+    <script src="./popper/popper.min.js"></script>
+    <script src="./bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="streamui.js"></script>
+    <script>
+      $(document).ready(function() {
+        $.getJSON("data/config/filters.json", function(data) {
+          document.getElementById("filter_title").innerHTML = data.title;
+          document.getElementById("filter_description").innerHTML = data.description;
+          document.getElementById("filter_stream").innerHTML = data.stream;
+          document.getElementById("filter_search").innerHTML = data.search;
+          document.getElementById("filter_count").innerHTML = data.count;
+          document.getElementById("filter_window").innerHTML = data.window;
+        });
+      });
+    </script>
+  </body>
 </html>
