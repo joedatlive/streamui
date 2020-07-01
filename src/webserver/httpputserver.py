@@ -4,8 +4,7 @@ import socketserver
 
 class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
-        cwd = os.getcwd()
-        filepath = cwd + self.path
+        filepath = os.getcwd() + self.path
         cleanpath = os.path.normpath(filepath)
         f = open(cleanpath, 'rb')
         self.send_response(200)
